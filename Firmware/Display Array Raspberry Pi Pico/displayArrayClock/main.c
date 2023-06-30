@@ -13,10 +13,10 @@
 #define OFF  0
 #define ON   1
 
-#define PIN_BTNA      6
-#define PIN_BTNB      7
-#define PIN_BTNC      8
-#define PIN_BTND      9
+#define PIN_BTNA      9
+#define PIN_BTNB      8
+#define PIN_BTNC      7
+#define PIN_BTND      6
 
 bool Backlight = OFF;
 bool ConfigureTime_MODE = OFF;
@@ -35,7 +35,7 @@ uint Selection = HRS;
     };
 
 void gpio_callback(uint gpio, uint32_t events) {
-
+   
    if(gpio == PIN_BTND){
       if(ConfigureTime_MODE == ON){
          ConfigureTime_MODE = OFF;

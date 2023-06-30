@@ -174,5 +174,8 @@ void lcdDrawNumber(PIO pio, uint sm, uint8_t Display, uint8_t Number){
                 lcdPut(pio, sm, heart_Theme[i]);}
         break;
     }
+    // deselect chip select after done... nicer for logic analyzer...
+    sleep_us(15);
+    selectDisplay(29); 
 
 }

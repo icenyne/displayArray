@@ -14,31 +14,31 @@
 #include "clockWood.h"
 #include "clockNixie.h"
 
-#define zero_Theme      zero_Flip
-#define one_Theme       one_Flip
-#define two_Theme       two_Flip
-#define three_Theme     three_Flip    
-#define four_Theme      four_Flip
-#define five_Theme      five_Flip
-#define six_Theme       six_Flip
-#define seven_Theme     seven_Flip
-#define eight_Theme     eight_Flip
-#define nine_Theme      nine_Flip
-#define colon_Theme     colon_Flip
-#define slash_Theme     slash_Flip
-#define space_Theme     space_Flip
-#define am_Theme        am_Flip
-#define pm_Theme        pm_Flip
-#define heart_Theme     heart_Flip
+#define zero_Theme      zero_Nixie
+#define one_Theme       one_Nixie
+#define two_Theme       two_Nixie
+#define three_Theme     three_Nixie    
+#define four_Theme      four_Nixie
+#define five_Theme      five_Nixie
+#define six_Theme       six_Nixie
+#define seven_Theme     seven_Nixie
+#define eight_Theme     eight_Nixie
+#define nine_Theme      nine_Nixie
+#define colon_Theme     colon_Nixie
+#define slash_Theme     slash_Nixie
+#define space_Theme     space_Nixie
+#define am_Theme        am_Nixie
+#define pm_Theme        pm_Nixie
+#define heart_Theme     heart_Nixie
 
 #define amAlarm_Theme   amAlarm_Ink
 #define pmAlarm_Theme   pmAlarm_Ink
 
-#define PIN_BLK     21
-#define PIN_RST     20
-#define PIN_DC      19
-#define PIN_SDI     18
-#define PIN_SCK     17
+#define PIN_BLK     22
+#define PIN_RST     21
+#define PIN_DC      20
+#define PIN_SDI     19
+#define PIN_SCK     18
 #define PIN_CS      15
 #define PIN_CS1      15
 #define PIN_CS2      14
@@ -50,7 +50,7 @@
 #define SCREEN_WIDTH    80
 #define SCREEN_HEIGHT   160
 
-#define SERIAL_CLK_DIV 1.f
+#define SERIAL_CLK_DIV 2.f
 
 // Color definitions
 
