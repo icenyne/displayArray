@@ -2,6 +2,7 @@
 #include "hardware/gpio.h"
 #include "hardware/pio.h"
 #include "hardware/rtc.h"
+#include "hardware/pwm.h"
 #include "pico/util/datetime.h"
 #include "ST7735.h"
 
@@ -18,7 +19,8 @@
 #define PIN_BTNC      7
 #define PIN_BTND      6
 
-bool Backlight = OFF;
+uint slice_num;
+uint BacklightPWM = 5000;
 bool ConfigureTime_MODE = OFF;
 uint Selection = HRS;
 
@@ -76,13 +78,9 @@ void gpio_callback(uint gpio, uint32_t events) {
     }else if(ConfigureTime_MODE == OFF){
 
        if(gpio == PIN_BTNC){
-         if(Backlight  == ON){
-            gpio_put(PIN_BLK, OFF);
-            Backlight = OFF;
-         }else if(Backlight == OFF){
-            gpio_put(PIN_BLK, ON);
-            Backlight = ON;
-            }
+		   BacklightPWM += 5000;
+		   if (BacklightPWM>65530) BacklightPWM = 0;
+		   pwm_set_chan_level(slice_num, PWM_CHAN_A, BacklightPWM);
       }
 
     }
@@ -118,7 +116,6 @@ int main(){
     gpio_init(PIN_CS6);
     gpio_init(PIN_DC);
     gpio_init(PIN_RST);
-    gpio_init(PIN_BLK);
 
     gpio_set_dir(PIN_CS1, GPIO_OUT);
     gpio_set_dir(PIN_CS2, GPIO_OUT);
@@ -128,7 +125,6 @@ int main(){
     gpio_set_dir(PIN_CS6, GPIO_OUT);
     gpio_set_dir(PIN_DC, GPIO_OUT);
     gpio_set_dir(PIN_RST, GPIO_OUT);
-    gpio_set_dir(PIN_BLK, GPIO_OUT);
 
     gpio_put(PIN_CS1, 0);
     gpio_put(PIN_CS2, 0);
@@ -138,8 +134,13 @@ int main(){
     gpio_put(PIN_CS6, 0);
     gpio_put(PIN_RST, 1);
     lcdInit(pio, sm, st7735_initSeq);
-    gpio_put(PIN_BLK, ON);
-    Backlight = ON;
+    
+    gpio_set_function(PIN_BLK, GPIO_FUNC_PWM);
+    slice_num = pwm_gpio_to_slice_num(PIN_BLK);
+    pwm_set_wrap(slice_num, 65535);
+    pwm_set_chan_level(slice_num, PWM_CHAN_A, BacklightPWM);
+    pwm_set_enabled(slice_num, true);
+    
     gpio_put(ONBOARD_LED, 1);
 
     lcdStartPx(pio,sm);

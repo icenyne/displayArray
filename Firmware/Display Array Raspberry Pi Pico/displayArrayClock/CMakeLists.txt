@@ -17,6 +17,7 @@ hardware_gpio
 hardware_pio
 hardware_interp
 hardware_rtc
+hardware_pwm
 )
 
 pico_add_extra_outputs(DisplayAClock)
